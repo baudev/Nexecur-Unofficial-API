@@ -1,6 +1,7 @@
 class Config {
 
-    private _token: string;
+    private _previous_token: string;
+    private _current_token: string;
     private _id_site: number;
     private _password: string;
     private _id_device: string;
@@ -9,13 +10,21 @@ class Config {
     constructor(){
 
     }
-
-    get token(): string {
-        return this._token;
+    
+    get previous_token(): string {
+        return this._previous_token;
     }
 
-    set token(value: string) {
-        this._token = value;
+    set previous_token(value: string) {
+        this._previous_token = value;
+    }
+
+    get current_token(): string {
+        return this._current_token;
+    }
+
+    set current_token(value: string) {
+        this._current_token = value;
     }
 
     get id_site(): number {
