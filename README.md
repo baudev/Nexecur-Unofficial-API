@@ -15,10 +15,19 @@ This is an Unofficial API of the Nexecur system.
 
 - Return the current alarm state:
 ```typescript
-import {Core} from "./Controllers/NexecurAPI";
+import {NexecurAPI} from "./Controllers/NexecurAPI";
 import {AlarmStatus} from "./Models/AlarmStatus";
 
-Core.getAlarmStatus((response: AlarmStatus) => {
+NexecurAPI.getAlarmStatus((response: AlarmStatus) => {
+    // ...
+})
+```
+
+- Return the alarm historic:
+```typescript
+import {NexecurAPI} from "./Controllers/NexecurAPI";
+
+NexecurAPI.getHistoric((response: string) => {
     // ...
 })
 ```
