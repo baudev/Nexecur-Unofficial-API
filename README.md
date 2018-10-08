@@ -5,7 +5,8 @@ This is an Unofficial API of the Nexecur system.
 ## Installation
 
 1. `git clone https://github.com/baudev/Nexecur-Unofficial-API.git`
-2. Configure the `config.json` file. You should provide the following values:
+2. `npm install`
+3. Configure the `config.json` file. You should provide the following values:
 - `id_site`
 - `password` (hash)
 - `pin` (hash)
