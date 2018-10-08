@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "web-request": "1.0.7"
+    "request": "^2.88.0"
   },
   "author": "",
   "license": "ISC"
