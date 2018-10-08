@@ -1,6 +1,7 @@
 import {UserConfiguration} from "../Models/UserConfiguration";
 import {Requests} from "./Requests";
 import {NexecurConfiguration} from "../Models/NexecurConfiguration";
+import {AlarmStatus} from "../Models/AlarmStatus";
 let userConfig : UserConfiguration = require('../config.json')
 
 export class Core {
@@ -58,11 +59,12 @@ export class Core {
      * Return the current status of the Alarm
      * @param {(response: string) => void} callback
      */
-    public static getAlarmStatus(callback: (response: string) => void){
+    public static getAlarmStatus(callback: (response: AlarmStatus) => void){
         this.checkIfNeedCreateDevice((response) => {
                 // we get the status of the alarm
                 Requests.site((response) => {
-                    callback(response.status)
+                    let test: AlarmStatus = response.status
+                    callback(test)
                 })
             })
 
