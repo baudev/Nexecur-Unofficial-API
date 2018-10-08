@@ -63,8 +63,8 @@ export class Core {
         this.checkIfNeedCreateDevice((response) => {
                 // we get the status of the alarm
                 Requests.site((response) => {
-                    let test: AlarmStatus = response.status
-                    callback(test)
+                    let result: AlarmStatus = response.status
+                    callback(result)
                 })
             })
 
