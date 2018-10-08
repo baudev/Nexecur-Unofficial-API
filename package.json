@@ -15,6 +15,7 @@
   "author": "Baudev & Quelqun007",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "@types/mocha": "^5.2.5"
   }
 }
