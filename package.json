@@ -5,12 +5,17 @@
   "main": "index.js",
   "scripts": {
     "install": "tsc -p tsconfig.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "dependencies": {
     "@types/node": "^10.11.4",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "typescript": "^3.1.1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Baudev & Quelqun007",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "@types/mocha": "^5.2.5"
+  }
 }
