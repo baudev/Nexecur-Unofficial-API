@@ -10,7 +10,6 @@ export class NexecurConfiguration {
     public static panelStatusURI : string = "/webservices/panel-status"
 
     private static fileName = './config.json'
-    private static file_content = fs.readFileSync(NexecurConfiguration.fileName);
 
 
     /**
@@ -18,7 +17,8 @@ export class NexecurConfiguration {
      * @param {string} token
      */
     public static updateToken(token: string){
-        var content = JSON.parse(this.file_content);
+        let file_content = fs.readFileSync(NexecurConfiguration.fileName);
+        var content = JSON.parse(file_content);
         content.token = token;
         fs.writeFileSync(NexecurConfiguration.fileName, JSON.stringify(content))
     }
@@ -28,7 +28,8 @@ export class NexecurConfiguration {
      * @param {string} idDevice
      */
     public static updateIdDevice(idDevice: string){
-        var content = JSON.parse(this.file_content);
+        let file_content = fs.readFileSync(NexecurConfiguration.fileName);
+        var content = JSON.parse(file_content);
         content.id_device = idDevice;
         fs.writeFileSync(NexecurConfiguration.fileName, JSON.stringify(content))
     }
