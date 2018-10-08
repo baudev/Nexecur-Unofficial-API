@@ -18,7 +18,7 @@ export class Requests {
             }
         }
         request.post(requestOptions, function(err,httpResponse,body){
-            // TODO handle error
+            if(err) throw new Error(err)
             callback(body)
         })
     }
@@ -39,7 +39,7 @@ export class Requests {
             }
         }
         request.post(requestOptions, function(err,httpResponse,body){
-            // TODO handle error
+            if(err) throw new Error(err)
             callback(body)
         })
     }
@@ -68,7 +68,7 @@ export class Requests {
             }
         }
         request.post(requestOptions, function(err,httpResponse,body){
-            // TODO handle error
+            if(err) throw new Error(err)
             callback(body)
         })
     }
@@ -89,7 +89,7 @@ export class Requests {
             }
         }
         request.post(requestOptions, function(err,httpResponse,body){
-            // TODO handle error
+            if(err) throw new Error(err)
             callback(body)
         })
     }
@@ -103,7 +103,7 @@ export class Requests {
             }
         }
         request.post(requestOptions, function(err,httpResponse,body){
-            // TODO handle error
+            if(err) throw new Error(err)
             callback(body)
         })
     }
