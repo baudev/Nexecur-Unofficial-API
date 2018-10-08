@@ -32,10 +32,10 @@ export class Core {
             // we get a token
             Requests.site((response) => {
                 // we update token in config.json file
-                NexecurConfiguration.updateToken(response.token);
+                NexecurConfiguration.updateToken(response["token"]);
                 // we register associated to the token a device
                 Requests.register(name, (response) => {
-                    NexecurConfiguration.updateIdDevice(response.id_device);
+                    NexecurConfiguration.updateIdDevice(response["id_device"]);
                     // TODO handle error
                     callback("success")
                 })
@@ -63,7 +63,7 @@ export class Core {
         this.checkIfNeedCreateDevice((response) => {
                 // we get the status of the alarm
                 Requests.site((response) => {
-                    let result: AlarmStatus = response.status
+                    let result: AlarmStatus = response["status"];
                     callback(result)
                 })
             })
@@ -78,7 +78,7 @@ export class Core {
         this.checkIfNeedCreateDevice((response) => {
             // we get the status of the alarm
             Requests.site((response) => {
-                callback(response.evenements)
+                callback(response["evenements"])
             })
         })
 
