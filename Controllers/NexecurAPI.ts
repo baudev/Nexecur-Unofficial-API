@@ -2,9 +2,10 @@ import {UserConfiguration} from "../Models/UserConfiguration";
 import {Requests} from "./Requests";
 import {NexecurConfiguration} from "../Models/NexecurConfiguration";
 import {AlarmStatus} from "../Models/AlarmStatus";
-let userConfig : UserConfiguration = require('../config.json')
+//import * as userConfig from '../Models/UserConfiguration';
+let userConfig : UserConfiguration = require('./../config.json')
 
-export class Core {
+export class NexecurAPI {
 
     /**
      * Check if we need creating a new device to control the alarm
