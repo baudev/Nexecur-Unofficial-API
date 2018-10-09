@@ -60,7 +60,7 @@ export class NexecurAPI {
      * Enable the alarm system
      * @param {(response: string) => void} callback
      */
-    public static enableAlarm(callback: (response: string) => void){
+    public static enableAlarm(callback: () => void){
         this.checkIfNeedCreateDevice((response) => {
             Requests.panelStatus((response => {
                 // we check if an error occurred
@@ -70,13 +70,13 @@ export class NexecurAPI {
                 // if there is any error, we check if the activation was instantaneous
                 if(response["pending"] == 0) {
                     // the alarm is now activated
-                    callback("Alarm successfully enabled");
+                    callback();
                 } else {
                     // the alarm is still not activated
                     new Promise((r, j) => {
                         Requests.panelCheckStatus(r, j);
                     }).then((result) => {
-                        callback("Alarm successfully enabled");
+                        callback();
                     })
                 }
             }), 1)
@@ -87,7 +87,7 @@ export class NexecurAPI {
      * Disable the alarm system
      * @param {(response: string) => void} callback
      */
-    public static disableAlarm(callback: (response: string) => void){
+    public static disableAlarm(callback: () => void){
         this.checkIfNeedCreateDevice((response) => {
             Requests.panelStatus((response => {
                 // we check if an error occurred
@@ -97,13 +97,13 @@ export class NexecurAPI {
                 // if there is any error, we check if the activation was instantaneous
                 if(response["pending"] == 0) {
                     // the alarm is now activated
-                    callback("Alarm successfully disabled");
+                    callback();
                 } else {
                     // the alarm is still not activated
                     new Promise((r, j) => {
                         Requests.panelCheckStatus(r, j);
                     }).then((result) => {
-                        callback("Alarm successfully disabled");
+                        callback();
                     })
                 }
             }), 0)
