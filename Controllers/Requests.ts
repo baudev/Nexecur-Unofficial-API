@@ -1,6 +1,7 @@
 import {NexecurConfiguration} from "../Models/NexecurConfiguration";
 import {UserConfiguration} from "../Models/UserConfiguration";
 import {Utils} from "../Helpers/Utils";
+import {StillPendingError} from "../Models/Errors/StillPendingError";
 let request = require('request');
 let userConfig : UserConfiguration = require('../config.json')
 
@@ -120,8 +121,7 @@ export class Requests {
     static async panelCheckStatus(resolve, reject, counter: number = 0) {
         // if the alarm is still not enabled or disabled after 60 seconds, we trigger an error
         if(counter >= NexecurConfiguration.NUMBER_SECONDS_MAX_WAIT_ACTIVATION_ALARM){
-            // TODO custome error
-            throw new Error("The order (enabling or disabling the alarm) don't seem to be applied correctly.")
+            throw new StillPendingError("The order (enabling or disabling the alarm) don't seem to be applied correctly.");
         }
         var requestOptions = {
             url: NexecurConfiguration.baseURL + NexecurConfiguration.panelCheckStatusURI,
