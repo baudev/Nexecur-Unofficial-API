@@ -8,9 +8,16 @@ export class NexecurConfiguration {
     public static siteURI: string = "/webservices/site"
     public static registerURI: string = "/webservices/register"
     public static panelStatusURI : string = "/webservices/panel-status"
+    public static panelCheckStatusURI : string = "/webservices/check-panel-status"
 
     private static fileName = './config.json'
 
+    /**
+     * When we send the order to activate the alarm, the order can take times before being applied.
+     * The following variable define how many seconds we are ready to wait for before triggering an error.
+     * @type {number}
+     */
+    public static NUMBER_SECONDS_MAX_WAIT_ACTIVATION_ALARM = 60;
 
     /**
      * Update the token in the config.json file
