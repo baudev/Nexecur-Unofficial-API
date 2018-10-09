@@ -1,5 +1,9 @@
 # Nexecur Unofficial API
 
+![GitHub release](https://img.shields.io/github/release/baudev/Nexecur-Unofficial-API.svg)
+![GitHub repo size in bytes](https://img.shields.io/github/repo-size/baudev/Nexecur-Unofficial-API.svg)
+![GitHub](https://img.shields.io/github/license/baudev/Nexecur-Unofficial-API.svg)
+
 This is an Unofficial API of the Nexecur system. 
 
 ## Installation
@@ -30,6 +34,14 @@ import {NexecurAPI} from "./Controllers/NexecurAPI";
 NexecurAPI.getHistoric((response: string) => {
     // ...
 })
+```
+
+- Enable the alarm:
+```typescript
+import {NexecurAPI} from "./Controllers/NexecurAPI";
+NexecurAPI.enableAlarm(() => {
+    // ...
+});
 ```
 
 ## License
