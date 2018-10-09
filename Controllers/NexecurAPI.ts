@@ -44,15 +44,57 @@ export class NexecurAPI {
         })
     }
 
+    /**
+     * Enable the alarm system
+     * @param {(response: string) => void} callback
+     */
     public static enableAlarm(callback: (response: string) => void){
         this.checkIfNeedCreateDevice((response) => {
-
+            Requests.panelStatus((response => {
+                // we check if an error occurred
+                if(response["message"] != "OK"){
+                    throw new Error("Error while activating alarm...");
+                }
+                // if there is any error, we check if the activation was instantaneous
+                if(response["pending"] == 0) {
+                    // the alarm is now activated
+                    callback("Alarm successfully enabled");
+                } else {
+                    // the alarm is still not activated
+                    new Promise((r, j) => {
+                        Requests.panelCheckStatus(r, j);
+                    }).then((result) => {
+                        callback("Alarm successfully enabled");
+                    })
+                }
+            }), 1)
         })
     }
 
+    /**
+     * Disable the alarm system
+     * @param {(response: string) => void} callback
+     */
     public static disableAlarm(callback: (response: string) => void){
         this.checkIfNeedCreateDevice((response) => {
-
+            Requests.panelStatus((response => {
+                // we check if an error occurred
+                if(response["message"] != "OK"){
+                    throw new Error("Error while disabling alarm...");
+                }
+                // if there is any error, we check if the activation was instantaneous
+                if(response["pending"] == 0) {
+                    // the alarm is now activated
+                    callback("Alarm successfully disabled");
+                } else {
+                    // the alarm is still not activated
+                    new Promise((r, j) => {
+                        Requests.panelCheckStatus(r, j);
+                    }).then((result) => {
+                        callback("Alarm successfully disabled");
+                    })
+                }
+            }), 0)
         })
     }
 
@@ -64,7 +106,7 @@ export class NexecurAPI {
         this.checkIfNeedCreateDevice((response) => {
                 // we get the status of the alarm
                 Requests.site((response) => {
-                    let result: AlarmStatus = response["status"];
+                    let result: AlarmStatus = response["panel_status"];
                     callback(result)
                 })
             })
