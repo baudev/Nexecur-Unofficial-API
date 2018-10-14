@@ -7,6 +7,7 @@ import {TokenGenerationError} from "../Models/Errors/TokenGenerationError";
 import {RegisteringDeviceError} from "../Models/Errors/RegisteringDeviceError";
 import {OrderAlarmError} from "../Models/Errors/OrderAlarmError";
 import {UndefinedAPIError} from "../Models/Errors/UndefinedAPIError";
+import {EncryptionKeys} from "../Helpers/EncryptionKeys";
 let userConfig : UserConfiguration = require('./../config.json')
 
 export class NexecurAPI {
@@ -36,6 +37,12 @@ export class NexecurAPI {
             if(response["message"] != "OK" || response["status"] != 0){
                 throw new SaltGenerationError("Error while generating a new device. The script can't get a new salt.")
             }
+            // we generate passwordHash and pinHash
+            let keys: EncryptionKeys = new EncryptionKeys(userConfig.password, response["salt"]);
+            keys.generateKeys();
+            // we save the generated keys
+            NexecurConfiguration.updatePassword(keys.passwordHash, userConfig);
+            NexecurConfiguration.updatePinHash(keys.pinHash, userConfig);
             // we get a token
             Requests.site((response) => {
                 // we check if an error occurred
@@ -43,13 +50,13 @@ export class NexecurAPI {
                     throw new TokenGenerationError("Error while getting a token for a new device.");
                 }
                 // we update token in config.json file
-                NexecurConfiguration.updateToken(response["token"]);
+                NexecurConfiguration.updateToken(response["token"], userConfig);
                 // we register associated to the token a device
                 Requests.register(name, (response) => {
                     if(response["message"] != "" || response["status"] != 0){
                         throw new RegisteringDeviceError("Error while registering a new device. The script can't update the id_device value. This error is normally not fatal.")
                     }
-                    NexecurConfiguration.updateIdDevice(response["id_device"]);
+                    NexecurConfiguration.updateIdDevice(response["id_device"], userConfig);
                     callback("success")
                 })
             })
