@@ -1,3 +1,5 @@
+import {UserConfiguration} from "./UserConfiguration";
+
 var fs = require('fs')
 
 export class NexecurConfiguration {
@@ -22,22 +24,52 @@ export class NexecurConfiguration {
     /**
      * Update the token in the config.json file
      * @param {string} token
+     * @param userConfig
      */
-    public static updateToken(token: string){
+    public static updateToken(token: string, userConfig: UserConfiguration){
         let file_content = fs.readFileSync(NexecurConfiguration.fileName);
         var content = JSON.parse(file_content);
         content.token = token;
+        userConfig.token = token;
+        fs.writeFileSync(NexecurConfiguration.fileName, JSON.stringify(content))
+    }
+
+    /**
+     * Update the pin in the config.json file
+     * @param {string} pin
+     * @param userConfig
+     */
+    public static updatePinHash(pin: string, userConfig: UserConfiguration){
+        let file_content = fs.readFileSync(NexecurConfiguration.fileName);
+        var content = JSON.parse(file_content);
+        content.pin = pin;
+        userConfig.pin = pin;
+        fs.writeFileSync(NexecurConfiguration.fileName, JSON.stringify(content))
+    }
+
+    /**
+     * Update the password in the config.json
+     * @param {string} password
+     * @param userConfig
+     */
+    public static updatePassword(password: string, userConfig: UserConfiguration){
+        let file_content = fs.readFileSync(NexecurConfiguration.fileName);
+        var content = JSON.parse(file_content);
+        content.password = password;
+        userConfig.password = password;
         fs.writeFileSync(NexecurConfiguration.fileName, JSON.stringify(content))
     }
 
     /**
      * Update the id_device in config.json file
      * @param {string} idDevice
+     * @param userConfig
      */
-    public static updateIdDevice(idDevice: string){
+    public static updateIdDevice(idDevice: string, userConfig: UserConfiguration){
         let file_content = fs.readFileSync(NexecurConfiguration.fileName);
         var content = JSON.parse(file_content);
         content.id_device = idDevice;
+        userConfig.id_device = idDevice;
         fs.writeFileSync(NexecurConfiguration.fileName, JSON.stringify(content))
     }
 
