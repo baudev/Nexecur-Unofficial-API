@@ -106,11 +106,11 @@ export class Requests {
             json: {}
         }
         // we ask alarming or disarming the alarm
-        if(alarmOrder != -1){
+        if(alarmOrder !== -1){
             console.log("Arming or Disarming Alarm")
-            /*requestOptions.json = {
+            requestOptions.json = {
                 "status": alarmOrder
-            }*/
+            }
         }
         request.post(requestOptions, function(err,httpResponse,body){
             if(err) throw new Error(err)
