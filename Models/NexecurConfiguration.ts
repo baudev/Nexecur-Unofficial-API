@@ -12,7 +12,7 @@ export class NexecurConfiguration {
     public static panelStatusURI : string = "/webservices/panel-status"
     public static panelCheckStatusURI : string = "/webservices/check-panel-status"
 
-    private static fileName = './config.json'
+    private static fileName = __dirname + "/../config.json";
 
     /**
      * When we send the order to activate the alarm, the order can take times before being applied.
