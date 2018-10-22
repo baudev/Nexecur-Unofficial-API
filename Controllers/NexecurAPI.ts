@@ -31,8 +31,8 @@ export class NexecurAPI {
      * @param {string} name
      * @param {(response: string) => void} callback
      */
-    private static createDevice(name: string, callback: (response: string) => void) {
-        // we get the salt (we don't know currently to what it's for...)
+    private static createDevice(name: string, callback: (response: string) => void){
+        // we get the salt
         Requests.getSalt((response: string) => {
             if (response["message"] != "OK" || response["status"] != 0) {
                 throw new SaltGenerationError("Error while generating a new device. The script can't get a new salt.")
@@ -44,13 +44,11 @@ export class NexecurAPI {
             NexecurConfiguration.updatePassword(keys.passwordHash, userConfig);
             NexecurConfiguration.updatePinHash(keys.pinHash, userConfig);
             // we get a token
-            Requests.site((response) => {
+            Requests.site(userConfig, (response) => {
                 // we check if an error occurred
                 if (response["message"] != "OK" || response["status"] != 0) {
                     throw new TokenGenerationError("Error while getting a token for a new device.");
                 }
-                // we update token in config.json file
-                NexecurConfiguration.updateToken(response["token"], userConfig);
                 // we register associated to the token a device
                 Requests.register(name, (response) => {
                     if (response["message"] != "" || response["status"] != 0) {
@@ -129,7 +127,7 @@ export class NexecurAPI {
         return new Promise((resolve, reject) => {
             this.checkIfNeedCreateDevice((response) => {
                 // we get the status of the alarm
-                Requests.site((response) => {
+                Requests.site(userConfig,(response) => {
                     if (response["message"] != "OK" || response["status"] != 0) {
                         reject(new UndefinedAPIError("Error while getting alarm status."));
                     }
@@ -149,7 +147,7 @@ export class NexecurAPI {
         return new Promise((resolve, reject) => {
             this.checkIfNeedCreateDevice((response) => {
                 // we get the status of the alarm
-                Requests.site((response) => {
+                Requests.site(userConfig,(response) => {
                     if (response["message"] != "OK" || response["status"] != 0) {
                         reject(new UndefinedAPIError("Error while getting alarm status."));
                     }
