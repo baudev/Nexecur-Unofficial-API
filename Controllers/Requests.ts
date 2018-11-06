@@ -75,7 +75,7 @@ export class Requests {
         })
     }
 
-    static async site(callback: (response: string) => void) {
+    static async site(userConfig: UserConfiguration, callback: (response: string) => void) {
         var requestOptions = {
             url: NexecurConfiguration.baseURL + NexecurConfiguration.siteURI,
             headers: {
@@ -92,6 +92,8 @@ export class Requests {
         }
         request.post(requestOptions, function(err,httpResponse,body){
             if(err) throw new Error(err)
+            // we update the token
+            NexecurConfiguration.updateToken(body["token"], userConfig)
             callback(body)
         })
     }

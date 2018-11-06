@@ -23,25 +23,31 @@ The value `deviceName` is optional. This is the name that will appear in the his
 import {NexecurAPI} from "./Controllers/NexecurAPI";
 import {AlarmStatus} from "./Models/AlarmStatus";
 
-NexecurAPI.getAlarmStatus((response: AlarmStatus) => {
-    // ...
-})
+NexecurAPI.getAlarmStatus().then((response: AlarmStatus) => {
+    // success...
+}).catch((error)=>{
+    // error...
+});
 ```
 
 - Return the alarm historic:
 ```typescript
 import {NexecurAPI} from "./Controllers/NexecurAPI";
 
-NexecurAPI.getHistoric((response: string) => {
-    // ...
-})
+NexecurAPI.getHistoric().then((response: any) => {
+    // success...
+}).catch((error)=>{
+    // error...
+});
 ```
 
 - Enable the alarm:
 ```typescript
 import {NexecurAPI} from "./Controllers/NexecurAPI";
-NexecurAPI.enableAlarm(() => {
-    // ...
+NexecurAPI.enableAlarm().then(() => {
+    // success...
+}).catch((error)=>{
+    // error...
 });
 ```
 
@@ -49,7 +55,7 @@ NexecurAPI.enableAlarm(() => {
 
 MIT License
 
-Copyright (c) 2018 Baudev, Quelqun007.
+Copyright (c) 2018 Baudev, Quelqundev.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
