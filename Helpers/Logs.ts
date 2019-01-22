@@ -9,11 +9,14 @@ export class Logs {
         dateFormat:'YYYY.MM.DD'
     };
 
+    constructor(){
+        Logs.instance.setLevel('debug');
+    }
+
     private static _instance = logs.createRollingFileLogger( Logs.opts );
 
 
     static get instance(): any {
-        this._instance.setLevel('debug');
         return this._instance;
     }
 
