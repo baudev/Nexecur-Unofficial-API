@@ -17,6 +17,7 @@ export class Logs {
 
 
     static get instance(): any {
+        this._instance.setLevel('debug');
         return this._instance;
     }
 
